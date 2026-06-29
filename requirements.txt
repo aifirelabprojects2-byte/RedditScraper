@@ -1,1 +1,11 @@
-apify[playwright] ~= 2.0
+# Apify SDK 3.x. The 2.x line pulled an old crawlee (0.6) whose Pydantic models
+# crashed on Pydantic >= 2.11 ("cannot specify both default and default_factory")
+# and whose browserforge shim broke on newer browserforge — both raised at import
+# time and killed the actor on startup. apify 3.x pins a coherent, maintained
+# crawlee 1.x + Pydantic 2.11+ stack that imports cleanly. Playwright + Chromium
+# come from the apify/actor-python-playwright base image (see Dockerfile).
+apify ~= 3.0
+
+# apify leaves Pydantic's upper bound open. Cap it so a future Pydantic major
+# can't drift in and reintroduce the same class of import-time breakage.
+pydantic >= 2.11, < 3

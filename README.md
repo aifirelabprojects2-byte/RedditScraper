@@ -66,7 +66,8 @@ Example input:
 ## Run locally
 
 ```bash
-pip install apify[playwright]
+pip install -r requirements.txt   # apify 3.x + pydantic
+pip install playwright            # provided by the base image in production
 playwright install chromium
 apify run            # with the Apify CLI, reads storage/key_value_stores/default/INPUT.json
 ```
