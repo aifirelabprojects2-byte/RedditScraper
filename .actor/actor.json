@@ -1,0 +1,9 @@
+{
+  "actorSpecification": 1,
+  "name": "reddit-trend-scraper",
+  "title": "Reddit Trend Scraper",
+  "description": "Scrapes Reddit subreddits and keyword searches with a real browser (Playwright) and returns ranked trending posts.",
+  "version": "2.0",
+  "input": "./input_schema.json",
+  "dockerfile": "../Dockerfile"
+}

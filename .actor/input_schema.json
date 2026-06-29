@@ -1,0 +1,97 @@
+{
+  "title": "Reddit Trend Scraper",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "keywords": {
+      "title": "Keywords",
+      "type": "array",
+      "description": "Keywords to search across Reddit (e.g. \"open ai\", \"llm\").",
+      "editor": "stringList",
+      "default": []
+    },
+    "subreddits": {
+      "title": "Subreddits",
+      "type": "array",
+      "description": "Subreddit names to scrape, without the r/ prefix (e.g. technology, news, Python). If both keywords and subreddits are empty, a default set of feeds is used.",
+      "editor": "stringList",
+      "default": []
+    },
+    "listingSort": {
+      "title": "Subreddit listing sort",
+      "type": "string",
+      "description": "Sort order for subreddit feeds.",
+      "editor": "select",
+      "enum": ["hot", "new", "top", "rising"],
+      "default": "hot"
+    },
+    "searchSorts": {
+      "title": "Search sorts",
+      "type": "array",
+      "description": "Sort orders to use for each keyword search.",
+      "editor": "stringList",
+      "default": ["hot", "relevance"]
+    },
+    "concurrency": {
+      "title": "Concurrency",
+      "type": "integer",
+      "description": "Number of browser pages scraped at once.",
+      "minimum": 1,
+      "maximum": 12,
+      "default": 4,
+      "editor": "number"
+    },
+    "scrolls": {
+      "title": "Lazy-load scrolls per feed",
+      "type": "integer",
+      "description": "Extra scrolls per feed to pull more than the first page (0 = first page only). More scrolls means more posts but slower runs.",
+      "minimum": 0,
+      "maximum": 20,
+      "default": 2,
+      "editor": "number"
+    },
+    "maxPostsPerFeed": {
+      "title": "Max posts per feed",
+      "type": "integer",
+      "description": "Cap on the number of posts collected per feed.",
+      "minimum": 1,
+      "maximum": 500,
+      "default": 100,
+      "editor": "number"
+    },
+    "minScore": {
+      "title": "Minimum score",
+      "type": "integer",
+      "description": "Drop posts below this upvote score.",
+      "minimum": 0,
+      "default": 0,
+      "editor": "number"
+    },
+    "maxRetries": {
+      "title": "Max retries per feed",
+      "type": "integer",
+      "description": "Extra attempts per feed on transient errors or empty (soft-blocked) responses. Each retry rotates to a fresh proxy IP.",
+      "minimum": 0,
+      "maximum": 6,
+      "default": 2,
+      "editor": "number"
+    },
+    "topTrends": {
+      "title": "Top trends in summary",
+      "type": "integer",
+      "description": "How many top trending posts to keep in the run summary (OUTPUT). The full set of posts is always pushed to the dataset.",
+      "minimum": 1,
+      "maximum": 200,
+      "default": 25,
+      "editor": "number"
+    },
+    "proxyConfiguration": {
+      "title": "Proxy configuration",
+      "type": "object",
+      "description": "Proxy used for browsing Reddit. Residential proxy is recommended to avoid blocks.",
+      "editor": "proxy",
+      "default": { "useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"] }
+    }
+  },
+  "required": []
+}
